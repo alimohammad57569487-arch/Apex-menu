@@ -7,28 +7,61 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0a0a0a; /* أسود ليلي */
+            background-color: #0d0d0d;
             color: #ffffff;
             margin: 0;
             padding: 0;
+            scroll-behavior: smooth;
         }
         header {
-            background-color: #1a2a3a; /* كحلي رياضي */
+            background-color: #121b26; /* كحلي فخم */
             text-align: center;
-            padding: 25px 20px;
-            border-bottom: 5px solid #3946e6; /* أحمر حماسي */
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            padding: 30px 20px 20px 20px;
+            border-bottom: 4px solid #e63946; /* أحمر أبيكس */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
         }
         header h1 {
             margin: 0;
-            font-size: 2.2em;
-            letter-spacing: 1px;
+            font-size: 2.4em;
+            letter-spacing: 2px;
             text-transform: uppercase;
+            color: #ffffff;
+            font-weight: 800;
         }
         header p {
             margin: 5px 0 0 0;
-            color: #a8b2c1;
-            font-size: 1em;
+            color: #e63946;
+            font-size: 1.1em;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        /* أزرار التنقل السريع للموبايل */
+        .nav-menu {
+            display: block;
+            text-align: center;
+            padding: 15px 10px;
+            background: #1a1a1a;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .nav-link {
+            display: inline-block;
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 16px;
+            margin: 0 4px;
+            border-radius: 20px;
+            background-color: #262626;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .nav-link:hover, .nav-link:active {
+            background-color: #e63946;
         }
         .container {
             padding: 20px;
@@ -37,46 +70,65 @@
         }
         .category {
             margin-bottom: 35px;
+            padding-top: 20px;
         }
         .category h2 {
-            background-color: #e63946;
+            background: linear-gradient(135deg, #e63946, #b31b27);
             color: white;
-            padding: 12px;
+            padding: 14px;
             border-radius: 8px;
             text-align: center;
             margin-bottom: 20px;
-            font-size: 1.3em;
-            box-shadow: 0 2px 5px rgba(230, 57, 70, 0.3);
+            font-size: 1.4em;
+            box-shadow: 0 4px 8px rgba(230, 57, 70, 0.2);
         }
         .item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #2a2a2a;
+            display: block;
+            padding: 14px 0;
+            border-bottom: 1px solid #222;
         }
         .item:last-child {
             border-bottom: none;
         }
-        .item-info {
-            flex-grow: 1;
+        .item-main {
+            display: table;
+            width: 100%;
         }
         .item-name {
+            display: table-cell;
             font-weight: bold;
             font-size: 1.15em;
             color: #f1f1f1;
+            vertical-align: middle;
+        }
+        .item-price-box {
+            display: table-cell;
+            text-align: left;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+        .price-new {
+            font-weight: bold;
+            color: #e63946;
+            font-size: 1.15em;
+        }
+        .price-old {
+            display: block;
+            font-size: 0.8em;
+            color: #888;
+            margin-top: 2px;
         }
         .item-desc {
             font-size: 0.9em;
-            color: #888;
-            margin-top: 4px;
+            color: #aaa;
+            margin-top: 6px;
+            line-height: 1.4;
         }
-        .item-price {
-            font-weight: bold;
+        .sub-item-title {
+            font-size: 0.95em;
             color: #e63946;
-            font-size: 1.1em;
-            white-space: nowrap;
-            margin-right: 15px;
+            margin-top: 8px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -84,49 +136,427 @@
 
     <header>
         <h1>APEX CAFE</h1>
-        <p>Gaming & Sports</p>
+        <p>GAMING & SPORTS</p>
     </header>
 
+    <div class="nav-menu">
+        <a href="#cold" class="nav-link">مشروبات باردة</a>
+        <a href="#energy" class="nav-link">مشروبات طاقة</a>
+        <a href="#hot" class="nav-link">مشروبات ساخنة</a>
+        <a href="#shisha" class="nav-link">أراكيل</a>
+        <a href="#snacks" class="nav-link">سناكات</a>
+    </div>
+
     <div class="container">
-        <div class="category">
-            <h2>مشروبات باردة ومنعشة</h2>
+
+        <div class="category" id="cold">
+            <h2>المشروبات الباردة</h2>
+            
             <div class="item">
-                <div class="item-info">
-                    <div class="item-name">سبانيش لاتيه بارد</div>
-                    <div class="item-desc">دبل شوت إسبريسو مع حليب مكثف وثلج</div>
+                <div class="item-main">
+                    <div class="item-name">ميلك شيك</div>
+                    <div class="item-price-box">
+                        <span class="price-new">100 / 150 / 200 ل.س</span>
+                        <span class="price-old">(10ك / 15ك / 20ك قديم)</span>
+                    </div>
                 </div>
-                <div class="item-price">0000 ل.س</div>
+                <div class="item-desc">النكهات: شوكولا، فانيليا، فريز، أوريو، لوتس، أبيكس.<br>الحجوم: صغير (200 مل) / ستاندر (250 مل) / كبير (350 مل)</div>
             </div>
+
             <div class="item">
-                <div class="item-info">
-                    <div class="item-name">ميلك شيك لوتس</div>
-                    <div class="item-desc">مزيج غني مع زبدة وبسكويت اللوتس</div>
+                <div class="item-main">
+                    <div class="item-name">آيس كوفي</div>
+                    <div class="item-price-box">
+                        <span class="price-new">150 ل.س</span>
+                        <span class="price-old">(15,000 قديم)</span>
+                    </div>
                 </div>
-                <div class="item-price">0000 ل.س</div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">آيس موكا</div>
+                    <div class="item-price-box">
+                        <span class="price-new">150 ل.س</span>
+                        <span class="price-old">(15,000 قديم)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">آيس سبانش لاتيه</div>
+                    <div class="item-price-box">
+                        <span class="price-new">150 ل.س</span>
+                        <span class="price-old">(15,000 قديم)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">آيس ميلو</div>
+                    <div class="item-price-box">
+                        <span class="price-new">150 ل.س</span>
+                        <span class="price-old">(15,000 قديم)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">آيس لاتيه لوتس</div>
+                    <div class="item-price-box">
+                        <span class="price-new">200 ل.س</span>
+                        <span class="price-old">(20,000 قديم)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">عصير طبيعي</div>
+                    <div class="item-price-box">
+                        <span class="price-new">70 ل.س</span>
+                        <span class="price-old">(7,000 قديم)</span>
+                    </div>
+                </div>
+                <div class="item-desc">برتقال وجزر / برتقال / أناناس / مانجو</div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">موهيتو</div>
+                    <div class="item-price-box">
+                        <span class="price-new">150 ل.س</span>
+                        <span class="price-old">(15,000 قديم)</span>
+                    </div>
+                </div>
+                <div class="item-desc">فريز / جيلي فريز / أوريجينال / بلو هاري</div>
             </div>
         </div>
 
-        <div class="category">
-            <h2>أجواء اللعب (PS5)</h2>
+        <div class="category" id="energy">
+            <h2>مشروبات الطاقة والغازيات</h2>
+            
             <div class="item">
-                <div class="item-info">
-                    <div class="item-name">ساعة لعب Single</div>
-                    <div class="item-desc">شاشة 4K مع أحدث الألعاب الرياضية والسيارات</div>
+                <div class="item-main">
+                    <div class="item-name">بايون كبير</div>
+                    <div class="item-price-box">
+                        <span class="price-new">100 ل.س</span>
+                        <span class="price-old">(10,000 قديم)</span>
+                    </div>
                 </div>
-                <div class="item-price">0000 ل.س</div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">بايون صغير</div>
+                    <div class="item-price-box">
+                        <span class="price-new">80 ل.س</span>
+                        <span class="price-old">(8,000 قديم)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">بايون XXL</div>
+                    <div class="item-price-box">
+                        <span class="price-new">80 ل.س</span>
+                        <span class="price-old">(8,000 قديم)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">بايون XXL مع نكهة</div>
+                    <div class="item-price-box">
+                        <span class="price-new">120 ل.س</span>
+                        <span class="price-old">(12,000 قديم)</span>
+                    </div>
+                </div>
+                <div class="item-desc">مع فريز أو رمان</div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">جاك</div>
+                    <div class="item-price-box">
+                        <span class="price-new">80 ل.س</span>
+                        <span class="price-old">(8,000 قديم)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">زويا نكهات</div>
+                    <div class="item-price-box">
+                        <span class="price-new">80 ل.س</span>
+                        <span class="price-old">(8,000 قديم)</span>
+                    </div>
+                </div>
+                <div class="item-desc">أناناس / بيري ميكس / رمان / بلو / كيوي / مانجو / فريز</div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">كولا</div>
+                    <div class="item-price-box">
+                        <span class="price-new">50 ل.س</span>
+                        <span class="price-old">(5,000 قديم)</span>
+                    </div>
+                </div>
+                <div class="item-desc">أورانج / أسود / ساده</div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">بيرة شعير</div>
+                    <div class="item-price-box">
+                        <span class="price-new">70 ل.س</span>
+                        <span class="price-old">(7,000 قديم)</span>
+                    </div>
+                </div>
+                <div class="item-desc">دراق / فريز / تفاح</div>
             </div>
         </div>
 
-        <div class="category">
-            <h2>عروض كأس العالم 2026</h2>
+        <div class="category" id="hot">
+            <h2>المشروبات الساخنة</h2>
+            
             <div class="item">
-                <div class="item-info">
-                    <div class="item-name">بكج السهرة المونديالية</div>
-                    <div class="item-desc">مشروب من اختيارك + سناك وقت المباراة</div>
+                <div class="item-main">
+                    <div class="item-name">إسبريسو (سنجل)</div>
+                    <div class="item-price-box">
+                        <span class="price-new">50 ل.س</span>
+                        <span class="price-old">(5,000 قديم)</span>
+                    </div>
                 </div>
-                <div class="item-price">0000 ل.س</div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">إسبريسو (دبل)</div>
+                    <div class="item-price-box">
+                        <span class="price-new">80 ل.س</span>
+                        <span class="price-old">(8,000 قديم)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">كابتشينو</div>
+                    <div class="item-price-box">
+                        <span class="price-new">60 ل.س</span>
+                        <span class="price-old">(6,000 قديم)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">ماكياتو</div>
+                    <div class="item-price-box">
+                        <span class="price-new">50 ل.س</span>
+                        <span class="price-old">(5,000 قديم)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">سبانش لاتيه</div>
+                    <div class="item-price-box">
+                        <span class="price-new">150 ل.س</span>
+                        <span class="price-old">(15,000 قديم)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">هوت شوكلت</div>
+                    <div class="item-price-box">
+                        <span class="price-new">100 ل.س</span>
+                        <span class="price-old">(10,000 قديم)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">ميلو</div>
+                    <div class="item-price-box">
+                        <span class="price-new">80 ل.س</span>
+                        <span class="price-old">(8,000 قديم)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">متة</div>
+                    <div class="item-price-box">
+                        <span class="price-new">80 ل.س</span>
+                        <span class="price-old">(8,000 قديم)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">شاي</div>
+                    <div class="item-price-box">
+                        <span class="price-new">50 ل.س</span>
+                        <span class="price-old">(5,000 قديم)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">زهورات</div>
+                    <div class="item-price-box">
+                        <span class="price-new">50 ل.س</span>
+                        <span class="price-old">(5,000 قديم)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">2 في 1</div>
+                    <div class="item-price-box">
+                        <span class="price-new">60 ل.س</span>
+                        <span class="price-old">(6,000 قديم)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">3 في 1</div>
+                    <div class="item-price-box">
+                        <span class="price-new">60 ل.س</span>
+                        <span class="price-old">(6,000 قديم)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">نسكافيه غولد</div>
+                    <div class="item-price-box">
+                        <span class="price-new">60 ل.س</span>
+                        <span class="price-old">(6,000 قديم)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">قهوة</div>
+                    <div class="item-price-box">
+                        <span class="price-new">50 ل.س</span>
+                        <span class="price-old">(5,000 قديم)</span>
+                    </div>
+                </div>
+                <div class="item-desc">تركية / أمريكانو</div>
             </div>
         </div>
+
+        <div class="category" id="shisha">
+            <h2>الأراكيل</h2>
+            
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">تفاحتين مزايا بحريني</div>
+                    <div class="item-price-box">
+                        <span class="price-new">180 ل.س</span>
+                        <span class="price-old">(18,000 قديم)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">تفاحتين نخلة M L</div>
+                    <div class="item-price-box">
+                        <span class="price-new">200 ل.س</span>
+                        <span class="price-old">(20,000 قديم)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">تفاحتين نخلة صلاخية</div>
+                    <div class="item-price-box">
+                        <span class="price-new">250 ل.س</span>
+                        <span class="price-old">(25,000 قديم)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">مزايا بولو</div>
+                    <div class="item-price-box">
+                        <span class="price-new">180 ل.س</span>
+                        <span class="price-old">(18,000 قديم)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">خدمة أركيلة</div>
+                    <div class="item-price-box">
+                        <span class="price-new">150 ل.س</span>
+                        <span class="price-old">(15,000 قديم)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="category" id="snacks">
+            <h2>سناكات وتسالي</h2>
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">شيبس</div>
+                    <div class="item-price-box"><span class="price-new">حسب الصنف</span></div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">مالح</div>
+                    <div class="item-price-box"><span class="price-new">حسب الصنف</span></div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">بسكويت</div>
+                    <div class="item-price-box"><span class="price-new">حسب الصنف</span></div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">كروسان</div>
+                    <div class="item-price-box"><span class="price-new">حسب الصنف</span></div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="item-main">
+                    <div class="item-name">بوظة</div>
+                    <div class="item-price-box"><span class="price-new">حسب الصنف</span></div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 </body>
